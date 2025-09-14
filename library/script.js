@@ -12,7 +12,6 @@ function addBooktoLibrary(title, author, pages) {
 };
 
 const libraryContainer = document.getElementById('library-container');
-
 function viewBooks() {
   libraryContainer.innerHTML = '';
 
@@ -40,3 +39,24 @@ addBooktoLibrary('kafka on the shore', 'murakami', 459);
 addBooktoLibrary('godfather', 'mario puzo', 398);
 
 viewBooks();
+
+
+const addButton = document.getElementById('add-book-btn');
+const dialog = document.getElementById('new-book-dialog');
+
+//const inputTitle = document.createElement('input');
+//dialog.appendChild(inputTitle);
+addButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+const form = document.getElementById("new-book-form");
+form.addEventListener("submit", () => {
+  event.preventDefault();
+  newBooktitle = document.getElementById("TitleInput").value;
+  newAuthor = document.getElementById("AuthorInput").value;
+  newPages = document.getElementById("PagesInput").value;
+  addBooktoLibrary(newBooktitle, newAuthor, newPages);
+  viewBooks();
+  dialog.close();
+});
