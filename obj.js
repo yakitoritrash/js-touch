@@ -31,15 +31,29 @@
 //  player.sayName();
 
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function() {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read} yet` 
-  };
+//  function Book(title, author, pages, read) {
+//    this.title = title;
+//    this.author = author;
+//    this.pages = pages;
+//    this.read = read;
+//    this.info = function() {
+//      return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read} yet` 
+//    };
+//  }
+//
+//  const theHobbit = new Book('The Hobbit', 'J.R.R Tolkien', 295, 'not read');
+//  console.log(theHobbit.info());
+
+function Player(name, marker) {
+  this.name = name;
+  this.marker = marker;
+  this.sayName = function() {
+    console.log(this.name);
+  }
 }
 
-const theHobbit = new Book('The Hobbit', 'J.R.R Tolkien', 295, 'not read');
-console.log(theHobbit.info());
+const player1 = new Player('steve', 'O');
+const player2 = new Player('bob', 'X');
+
+Object.getPrototypeOf(player1) === Player.prototype;  
+Object.getPrototypeOf(player2) === Player.prototype;
