@@ -51,11 +51,11 @@ addButton.addEventListener("click", () => {
 });
 
 const form = document.getElementById("new-book-form");
-form.addEventListener("submit", () => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-  newBooktitle = document.getElementById("TitleInput").value;
-  newAuthor = document.getElementById("AuthorInput").value;
-  newPages = document.getElementById("PagesInput").value;
+  const newBooktitle = document.getElementById("TitleInput").value;
+  const newAuthor = document.getElementById("AuthorInput").value;
+  const newPages = document.getElementById("PagesInput").value;
   addBooktoLibrary(newBooktitle, newAuthor, newPages);
   viewBooks();
   dialog.close();
