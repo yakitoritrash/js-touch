@@ -31,11 +31,11 @@ const GameController = (function() {
   const switchPlayer = () => {
     currPlayer = currPlayer === player1 ? player2 : player1;
   }
-  let winarr = [[0, 1, 2], [3, 4, 5], [6, 7, 8],[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 5, 8], [2, 5, 6]]
+  let winarr = [[0, 1, 2], [3, 4, 5], [6, 7, 8],[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
   let currBoard = Gameboard.getBoard();
   const checkForWinner = () => {
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < winarr.length; i++) {
       const combination = winarr[i];
       const pos1 = combination[0];
       const pos2 = combination[1];
@@ -45,7 +45,10 @@ const GameController = (function() {
         return;
       }
     }
-  }
+      if (!currBoard.includes("")) {
+        console.log("It's a tie!");
+      }
+  };
 
   const playRound = (index) => {
     Gameboard.markBoard(index, currPlayer.mark);
