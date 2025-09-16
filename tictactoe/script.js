@@ -28,8 +28,33 @@ const GameController = (function() {
 
   let currPlayer = player1;
 
-  const playRound = (index) => {
-    Gameboard.getBoard();
-    Gameboard.markBoard(currPlayer, mark);
+  const switchPlayer = () => {
+    currPlayer = currPlayer === player1 ? player2 : player1;
   }
+  let winarr = [[0, 1, 2], [3, 4, 5], [6, 7, 8],[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 5, 8], [2, 5, 6]]
+
+  let currBoard = Gameboard.getBoard();
+  const checkForWinner = () => {
+    for (let i = 0; i < 9; i++) {
+      const combination = winarr[i];
+      const pos1 = combination[0];
+      const pos2 = combination[1];
+      const pos3 = combination[2];
+      if (currBoard[pos1] == currBoard[pos2] && currBoard[pos2] == currBoard[pos3] && currBoard[pos1] != '') {
+        console.log(`winner: ${currPlayer.name}`);
+        return;
+      }
+    }
+  }
+
+  const playRound = (index) => {
+    Gameboard.markBoard(index, currPlayer.mark);
+    checkForWinner();
+
+    switchPlayer();
+
+    console.log(Gameboard.getBoard());
+  }
+
+  return {playRound};
 })();
