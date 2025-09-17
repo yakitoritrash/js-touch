@@ -28,6 +28,7 @@ const GameController = (function() {
 
   let currPlayer = player1;
 
+  let isGameOver = false;
   const switchPlayer = () => {
     currPlayer = currPlayer === player1 ? player2 : player1;
   }
@@ -43,16 +44,19 @@ const GameController = (function() {
       if (currBoard[pos1] == currBoard[pos2] && currBoard[pos2] == currBoard[pos3] && currBoard[pos1] != '') {
         //console.log(`winner: ${currPlayer.name}`);
         DisplayController.displayResult(`winner: ${currPlayer.name}`);
+        isGameOver = true;
         return;
       }
     }
       if (!currBoard.includes("")) {
         //console.log("It's a tie!");
         DisplayController.displayResult("It's a tie!");
+        isGameOver = true;
       }
   };
 
   const playRound = (index) => {
+    if (isGameOver) return;
     Gameboard.markBoard(index, currPlayer.mark);
     checkForWinner();
 
@@ -62,11 +66,19 @@ const GameController = (function() {
     DisplayController.renderBoard();
   };
 
-  return {playRound};
+  const resetGame = () => {
+    Gameboard.resetBoard();
+    currPlayer = player1;
+    isGameOver = false;
+    DisplayController.displayResult("");
+  }
+
+  return {playRound, resetGame};
 })();
 
 const DisplayController = (function() {
   const container = document.getElementById("container");
+  const resetbutton = document.getElementById("restart-btn");
   const renderBoard = () => {
     container.innerHTML = "";
     const board = Gameboard.getBoard();
@@ -83,8 +95,14 @@ const DisplayController = (function() {
 
   const result = document.getElementById("game-result");
   const displayResult = (message) => {
-    result.appendChild(message);
+    result.textContent = message;
   };
+
+  resetbutton.addEventListener('click', () => {
+    GameController.resetGame();
+    renderBoard();
+  });
+
   return { renderBoard, displayResult };
 })();
 
