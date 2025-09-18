@@ -33,9 +33,27 @@ const mainapp = (function () {
     }
   }
 
+  const return_project = function() {
+    return project_arr;
+  }
   return { add_projects, app_todo_to_project };
 })();
 
 const DisplayController = (function (mainapp) {
+  const layout = function() {
+    const sidebar = document.createElement("div");
+    document.body.appendChild(sidebar);
+    const maincontent = document.createElement("div");
+    document.body.appendChild(maincontent);
+  }
 
+  const displayProjects = function() {
+    sidebar.innerHtml = "";
+    const projectarr = return_project();
+    for (let i = 0; i < projectarr.length; i++) {
+      const displayname = document.createElement("h2");
+      displayname.textContent = `${projectarr[i].name}`;
+      sidebar.appendChild(displayname);
+    }
+  }
 })();
