@@ -70,6 +70,7 @@ const DisplayController = (function () {
       displayname.textContent = `${projectarr[i].name}`;
       displayname.addEventListener('click', () => {
         mainapp.return_todos(projectarr[i].name);
+        displayTodos(projectarr[i].name)
       })
       sidebar.appendChild(displayname);
     }
