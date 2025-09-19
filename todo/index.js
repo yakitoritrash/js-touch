@@ -36,24 +36,59 @@ const mainapp = (function () {
   const return_project = function() {
     return project_arr;
   }
-  return { add_projects, app_todo_to_project };
+
+  const return_todos = function(project_name) {
+    const targetproject = project_arr.find(project => project.name === project_name);
+    if (targetproject) {
+      return targetproject.project_todo;
+    }
+  }
+
+  return { add_projects, app_todo_to_project, return_project, return_todos };
 })();
 
-const DisplayController = (function (mainapp) {
+const DisplayController = (function () {
+  let sidebar;
+  let maincontent;
+
   const layout = function() {
-    const sidebar = document.createElement("div");
+    sidebar = document.createElement("div");
+    sidebar.id = "sidebar";
     document.body.appendChild(sidebar);
-    const maincontent = document.createElement("div");
+    maincontent = document.createElement("div");
+    maincontent.id = "main-content";
     document.body.appendChild(maincontent);
   }
 
   const displayProjects = function() {
-    sidebar.innerHtml = "";
-    const projectarr = return_project();
+    sidebar.innerHTML = "";
+    const projectarr = mainapp.return_project();
+    console.log(projectarr);
     for (let i = 0; i < projectarr.length; i++) {
+      console.log(projectarr[i]);
       const displayname = document.createElement("h2");
       displayname.textContent = `${projectarr[i].name}`;
+      displayname.addEventListener('click', () => {
+        mainapp.return_todos(projectarr[i].name);
+      })
       sidebar.appendChild(displayname);
     }
   }
+
+  const displayTodos = function(projectname) {
+    maincontent.innerHTML = "";
+    const todos = mainapp.return_todos(projectname);
+    if (todos) {
+      todos.forEach(todo => {
+        const todoCard = document.createElement('div');
+        todoCard.textContent = `title: ${todo.title}, due: ${todo.due_date}`;
+        maincontent.appendChild(todoCard);
+      });
+    }
+  }
+
+  return { layout, displayProjects, displayTodos };
 })();
+
+DisplayController.layout();
+DisplayController.displayProjects();
