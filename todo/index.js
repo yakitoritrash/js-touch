@@ -13,6 +13,7 @@ const mainapp = (function () {
   const project_arr = [];
   const default_project = project("default");
   project_arr.push(default_project);
+
   const add_projects = function (name) {
     const new_project = project(name);
     project_arr.push(new_project);
@@ -76,6 +77,14 @@ const DisplayController = (function () {
     }
   }
 
+  const add_p = document.getElementById("add-project");
+  sidebar.appendChild(add_p);
+  add_p.addEventListener('click', () => {
+    let project_name = prompt("name the project");
+    mainapp.add_projects(project_name);
+    displayProjects();
+  });
+
   const displayTodos = function(projectname) {
     maincontent.innerHTML = "";
     const todos = mainapp.return_todos(projectname);
@@ -87,6 +96,11 @@ const DisplayController = (function () {
       });
     }
   }
+
+  const add_t = document.getElementById("add-todo");
+  maincontent.appendChild(add_t);
+  add_t.addEventListener('click', {
+  });
 
   return { layout, displayProjects, displayTodos };
 })();
