@@ -59,6 +59,17 @@ const DisplayController = (function () {
     maincontent = document.createElement("div");
     maincontent.id = "main-content";
     document.body.appendChild(maincontent);
+    const add_p = document.getElementById("add-project");
+    sidebar.appendChild(add_p);
+    add_p.addEventListener('click', () => {
+      let project_name = prompt("name the project");
+      mainapp.add_projects(project_name);
+      displayProjects();
+    });
+    const add_t = document.getElementById("add-todo");
+    maincontent.appendChild(add_t);
+    add_t.addEventListener('click', {
+    });
   }
 
   const displayProjects = function() {
@@ -77,14 +88,6 @@ const DisplayController = (function () {
     }
   }
 
-  const add_p = document.getElementById("add-project");
-  sidebar.appendChild(add_p);
-  add_p.addEventListener('click', () => {
-    let project_name = prompt("name the project");
-    mainapp.add_projects(project_name);
-    displayProjects();
-  });
-
   const displayTodos = function(projectname) {
     maincontent.innerHTML = "";
     const todos = mainapp.return_todos(projectname);
@@ -97,10 +100,6 @@ const DisplayController = (function () {
     }
   }
 
-  const add_t = document.getElementById("add-todo");
-  maincontent.appendChild(add_t);
-  add_t.addEventListener('click', {
-  });
 
   return { layout, displayProjects, displayTodos };
 })();
