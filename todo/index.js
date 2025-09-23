@@ -63,8 +63,10 @@ const DisplayController = (function () {
     sidebar.appendChild(add_p);
     add_p.addEventListener('click', () => {
       let project_name = prompt("name the project");
-      mainapp.add_projects(project_name);
-      displayProjects();
+      if (project_name) {
+        mainapp.add_projects(project_name);
+        displayProjects();
+      }
     });
     const projectlistcont = document.createElement("div");
     projectlistcont.id = 'project-list';
