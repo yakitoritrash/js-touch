@@ -74,6 +74,7 @@ const DisplayController = (function () {
     const add_t = document.getElementById("add-todo");
     maincontent.appendChild(add_t);
     add_t.addEventListener('click', {
+
     });
   }
 
