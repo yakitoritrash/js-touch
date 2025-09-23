@@ -66,6 +66,9 @@ const DisplayController = (function () {
       mainapp.add_projects(project_name);
       displayProjects();
     });
+    const projectlistcont = document.createElement("div");
+    projectlistcont.id = 'project-list';
+    sidebar.appendChild(projectlistcont);
     const add_t = document.getElementById("add-todo");
     maincontent.appendChild(add_t);
     add_t.addEventListener('click', {
@@ -73,7 +76,9 @@ const DisplayController = (function () {
   }
 
   const displayProjects = function() {
-    sidebar.innerHTML = "";
+    //sidebar.innerHTML = "";
+    const projectlistcontainer = document.getElementById("project-list");
+    projectlistcontainer.innerHTML = "";
     const projectarr = mainapp.return_project();
     console.log(projectarr);
     for (let i = 0; i < projectarr.length; i++) {
@@ -84,7 +89,7 @@ const DisplayController = (function () {
         mainapp.return_todos(projectarr[i].name);
         displayTodos(projectarr[i].name)
       })
-      sidebar.appendChild(displayname);
+      projectlistcontainer.appendChild(displayname);
     }
   }
 
