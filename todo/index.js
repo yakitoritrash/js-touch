@@ -49,6 +49,7 @@ const mainapp = (function () {
 })();
 
 const DisplayController = (function () {
+  let currentProjectName = "default";
   let sidebar;
   let maincontent;
 
@@ -73,9 +74,25 @@ const DisplayController = (function () {
     sidebar.appendChild(projectlistcont);
     const add_t = document.getElementById("add-todo");
     maincontent.appendChild(add_t);
-    add_t.addEventListener('click', {
-
+    add_t.addEventListener('click', () => {
+      document.getElementById('todo-prop').showModal();
     });
+    const newTodoForm = document.getElementById('new-todo-form');
+    newTodoForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const title = document.getElementById('title_input').value;
+      const description = document.getElementById('desc_input').value;
+      const dueDate = document.getElementById('date_input').value;
+      const priority = document.getElementById('priority_input').value;
+      const todoDetails = { title, description, dueDate, priority };
+      mainapp.app_todo_to_project(currentProjectName, todoDetails);
+      displayTodos(currentProjectName);
+      document.getElementById('todo-prop').close();
+      newTodoForm.reset();
+    });
+    const todoListContainer = document.createElement('div');
+    todoListContainer.id = 'todo-list';
+    maincontent.appendChild(todoListContainer);
   }
 
   const displayProjects = function() {
@@ -89,6 +106,7 @@ const DisplayController = (function () {
       const displayname = document.createElement("h2");
       displayname.textContent = `${projectarr[i].name}`;
       displayname.addEventListener('click', () => {
+        currentProjectName = projectarr[i].name;
         mainapp.return_todos(projectarr[i].name);
         displayTodos(projectarr[i].name)
       })
@@ -97,13 +115,14 @@ const DisplayController = (function () {
   }
 
   const displayTodos = function(projectname) {
-    maincontent.innerHTML = "";
+    const todoListContainer = document.getElementById('todo-list');
+    todoListContainer.innerHTML = "";
     const todos = mainapp.return_todos(projectname);
     if (todos) {
       todos.forEach(todo => {
         const todoCard = document.createElement('div');
         todoCard.textContent = `title: ${todo.title}, due: ${todo.due_date}`;
-        maincontent.appendChild(todoCard);
+        todoListContainer.appendChild(todoCard);
       });
     }
   }

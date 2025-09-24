@@ -7,7 +7,31 @@
   <body>
     <button id = "add-project">Add a project</button>
     <button id = "add-todo">Add a task</button>
-    <dialog id = "todo-prop"></dialog>
+    <dialog id = "todo-prop">
+      <form id = "new-todo-form">
+        <div>
+          <label for="title_input">Title:</label>
+          <input type= "text" id = "title_input" name="title" required>
+        </div>
+        <div>
+          <label for="desc_input">Description:</label>
+          <textarea name= "description" id = "desc_input"></textarea>
+        </div>
+        <div>
+          <label for="date_input">Due Date:</label>
+          <input type="date" id="date_input" name="due_date">
+        </div>
+        <div>
+          <label for="priority_input">Due Date:</label>
+          <select id="priority_input" name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <button type="submit">Add Task</button>
+      </form>
+    </dialog>
     <script src = "index.js"></script>
   </body>
 </html>
