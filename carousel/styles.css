@@ -1,0 +1,43 @@
+#frame {
+  overflow: hidden;
+  position: relative; 
+  aspect-ratio: 1920px/1080px;
+  max-width: 1920px;
+}
+#filmstrip{
+  display: flex;
+  flex-direction: row;
+}
+
+.carimage {
+  min-width: 100%;
+}
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  justify-content: space-between;
+  top: 0;
+  z-index: 1;
+}
+#left-control, #right-control {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0 1rem; /* Adds some spacing */
+}
+
+#controls h2 {
+  color: white;
+  font-size: 3rem; /* Makes the text large */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  margin: 0;
+}
+
+#left-control:hover, #right-control:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
