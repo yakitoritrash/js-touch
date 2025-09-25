@@ -7,6 +7,7 @@
 #filmstrip{
   display: flex;
   flex-direction: row;
+  transition: transform 0.5s ease-in-out;
 }
 
 .carimage {
@@ -40,4 +41,34 @@
 
 #left-control:hover, #right-control:hover {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+#dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  bottom: 11px;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#dots div {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+#dots div.active-dot {
+  background-color: #333;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  display: flex;
 }
