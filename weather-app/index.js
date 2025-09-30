@@ -13,6 +13,7 @@ async function getWeatherData(location) {
 
 function processData(apiData) {
   const returnObj = {
+    name: apiData.name,
     coord: {lon: apiData.coord.lon, lat: apiData.coord.lat},
     temp: apiData.main.temp,
     temp_feels_like: apiData.main.feels_like,
@@ -25,11 +26,19 @@ function processData(apiData) {
 }
 
 
+function Displaydata(returnObj) {
+  const div = document.getElementById("main");
+  const cityname = document.createElement("h1");
+  cityname.textContent = returnObj.name;
+  div.appendChild(cityname);
+}
+
 async function main() {
   const apiData = await getWeatherData("delhi");
   //console.log(apiData);
   if (apiData) {
-    processData(apiData);
+    const returnObj = processData(apiData);
+    Displaydata(returnObj);
   }
 }
 
