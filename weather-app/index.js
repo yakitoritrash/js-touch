@@ -4,14 +4,33 @@ async function getWeatherData(location) {
   try {
     const response = await fetch(url);
     const weatherData = await response.json();
-    console.log(weatherData);
+    return weatherData;
   } catch (error) {
     console.log("error fetching weather data:", error);
   }
 }
 
-const apiData = getWeatherData("delhi");
 
 function processData(apiData) {
-
+  const returnObj = {
+    coord: {lon: apiData.coord.lon, lat: apiData.coord.lat},
+    temp: apiData.main.temp,
+    temp_feels_like: apiData.main.feels_like,
+    humidity: apiData.main.humidity,
+    main: apiData.weather[0].main,
+    description: apiData.weather[0].description,
+  };
+  console.log(returnObj);
+  return returnObj;
 }
+
+
+async function main() {
+  const apiData = await getWeatherData("delhi");
+  //console.log(apiData);
+  if (apiData) {
+    processData(apiData);
+  }
+}
+
+main();
