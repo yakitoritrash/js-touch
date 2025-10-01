@@ -24,21 +24,40 @@ function processData(apiData) {
   return returnObj;
 }
 
-
 function Displaydata(returnObj) {
   const div = document.getElementById("main");
   const cityname = document.createElement("h1");
   cityname.textContent = returnObj.name;
+  cityname.classList.add("top-head");
+  const maincontent = document.createElement("h1");
+  maincontent.textContent = returnObj.main;
   div.appendChild(cityname);
+  const temp = document.createElement("h1");
+  temp.textContent = returnObj.temp;
+  temp.classList.add("top-head");
+  div.appendChild(temp);
+  div.appendChild(maincontent);
+  const description = document.createElement("p"); 
+  description.textContent = returnObj.description;
+  div.appendChild(description);
 }
 
 async function main() {
-  const apiData = await getWeatherData("delhi");
+  const form = document.getElementById("location-form");
+  const input = document.getElementById("location-input");
+  const maindiv = document.getElementById("main");
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const location = input.value;
+    maindiv.innerHTML = '';
+    const apiData = await getWeatherData(location);
+    if (apiData) {
+      const returnObj = processData(apiData);
+      Displaydata(returnObj);
+    }
+  });
   //console.log(apiData);
-  if (apiData) {
-    const returnObj = processData(apiData);
-    Displaydata(returnObj);
-  }
 }
 
 main();
