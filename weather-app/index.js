@@ -10,7 +10,6 @@ async function getWeatherData(location) {
   }
 }
 
-
 function processData(apiData) {
   const returnObj = {
     name: apiData.name,
