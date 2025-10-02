@@ -39,8 +39,9 @@ function all(arr, callback)  {
 }
 
 function productOfarray (arr) {
-
+  if (arr.length === 0) return true;
+  return (arr.shift() * productOfarray(arr))
 }
 
-const output = factorial(5);
-console.log(allAreLessThanSeven);
+const output = productOfarray([1, 2, 3, 4, 5]);
+console.log(output);
