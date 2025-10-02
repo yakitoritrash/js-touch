@@ -15,5 +15,13 @@ function power(x, n) {
   }
 }
 
-const output = power(16, 2);
+function factorial(x) {
+  if (x == 1) {
+    return 1
+  } else {
+    return x * factorial(x - 1)
+  }
+}
+
+const output = factorial(5);
 console.log(output);
