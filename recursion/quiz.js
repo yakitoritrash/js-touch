@@ -43,5 +43,9 @@ function productOfarray (arr) {
   return (arr.shift() * productOfarray(arr))
 }
 
+function contains() {
+
+}
+
 const output = productOfarray([1, 2, 3, 4, 5]);
 console.log(output);
