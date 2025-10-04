@@ -5,10 +5,10 @@ function fibonacci(num) {
   } else if (num === 1) {
     arr.push(1);
   } else {
-    arr.push(num + fibonacci(num - 1) + fibonacci(num - 2));
+    arr.push(fibonacci(num - 1) + fibonacci(num - 2));
   }
   return arr
 }
 
-const output = fibonacci(8)
+const output = fibonacci(3)
 console.log(output);
